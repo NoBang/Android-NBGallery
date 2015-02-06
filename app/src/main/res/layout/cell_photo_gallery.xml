@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:orientation="vertical" >
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@drawable/shape_image_empty"
+        android:padding="1dp" >
+
+        <ImageView
+            android:id="@+id/imageThumb"
+            android:layout_width="110dp"
+            android:layout_height="90dp"
+            android:adjustViewBounds="true"
+            android:scaleType="center" />
+
+        <FrameLayout
+            android:id="@+id/photoContainer"
+            android:layout_width="110dp"
+            android:layout_height="90dp" >
+        </FrameLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="90dp"
+            android:layout_gravity="center"
+            android:orientation="vertical" >
+
+            <ImageView
+                android:id="@+id/imageCheck"
+                android:layout_width="110dp"
+                android:layout_height="90dp"
+                android:src="@drawable/photo_circle"
+                android:scaleType="centerInside"
+                android:visibility="gone" />
+        </LinearLayout>
+    </FrameLayout>
+
+</LinearLayout>
