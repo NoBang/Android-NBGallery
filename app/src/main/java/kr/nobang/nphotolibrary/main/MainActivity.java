@@ -10,6 +10,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Toast;
 
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.ImageLoader;
+import com.nostra13.universalimageloader.core.ImageLoaderConfiguration;
+import com.nostra13.universalimageloader.core.display.FadeInBitmapDisplayer;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,6 +32,8 @@ public class MainActivity extends ActionBarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        initImageLoader();
+        
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -47,6 +54,20 @@ public class MainActivity extends ActionBarActivity {
         });
     }
 
+    /**
+     * 이미지 로더 초기화
+     */
+    private void initImageLoader() {
+        FadeInBitmapDisplayer fb = new FadeInBitmapDisplayer(150);
+        DisplayImageOptions options = new DisplayImageOptions.Builder().showImageOnLoading(R.drawable.loading)
+                // resource or drawable
+                .showImageForEmptyUri(R.drawable.loading)
+                        // resource or drawable
+                .showImageOnFail(R.drawable.loading).displayer(fb).cacheOnDisk(true).cacheInMemory(true).build();
+
+        ImageLoaderConfiguration config = new ImageLoaderConfiguration.Builder(getApplicationContext()).defaultDisplayImageOptions(options).build();
+        ImageLoader.getInstance().init(config);
+    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
