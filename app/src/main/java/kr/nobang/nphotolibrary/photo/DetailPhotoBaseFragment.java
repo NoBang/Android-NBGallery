@@ -20,6 +20,8 @@ import com.nostra13.universalimageloader.core.listener.PauseOnScrollListener;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
 import data.PhotoItem;
 import kr.nobang.nphotolibrary.R;
 import kr.nobang.nphotolibrary.adapter.PhotoAdapter;
@@ -68,6 +70,11 @@ public class DetailPhotoBaseFragment extends BaseFragment implements
      */
     private int maxCount = 0;
 
+    /**
+     * 데이터 배열
+     */
+    private ArrayList<PhotoItem> arrayList;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -79,7 +86,7 @@ public class DetailPhotoBaseFragment extends BaseFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageCount = getAttachActivity().getIntent().getIntExtra("count", 0);
+        imageCount = LoadPhotoActivity.SELECT_IMAGE_COUNT;
         maxCount = LoadPhotoActivity.IMAGE_MAX;
 
         initLayout();
@@ -117,7 +124,7 @@ public class DetailPhotoBaseFragment extends BaseFragment implements
                     adapter.getSelectArray().remove(Integer.valueOf(position));
                 } else {
 
-                    if (adapter.getSelectArray().size() > Math.max(
+                    if (adapter.getSelectArray().size() >= Math.max(
                             (maxCount - imageCount),
                             1)) {
                         adapter.getSelectArray().remove(0);
@@ -213,42 +220,8 @@ public class DetailPhotoBaseFragment extends BaseFragment implements
             @Override
             protected Void doInBackground(Void... params) {
 
-                PhotoItem camera = new PhotoItem();
-                camera.isCam = true;
                 adapter.getArrayList().clear();
-                adapter.getArrayList().add(camera);
-
-                final String[] columns = {MediaStore.Images.Media.DATA,
-                        MediaStore.Images.Media._ID};
-                final String orderBy = MediaStore.Files.FileColumns.DATE_ADDED + " DESC";
-
-                Cursor imageCursor = getActivity().getContentResolver().query(
-                        MediaStore.Images.Media.EXTERNAL_CONTENT_URI, columns,
-                        null, null, orderBy);
-                int image_column_index = imageCursor
-                        .getColumnIndex(MediaStore.Images.Media._ID);
-                int count = imageCursor.getCount();
-
-                for (int i = 0; i < count; i++) {
-                    imageCursor.moveToPosition(i);
-                    int id = imageCursor.getInt(image_column_index);
-                    int dataColumnIndex = imageCursor
-                            .getColumnIndex(MediaStore.Images.Media.DATA);
-                    int dataThumbColumnIndex = imageCursor
-                            .getColumnIndex(MediaStore.Images.Thumbnails.DATA);
-
-
-                    PhotoItem item = new PhotoItem();
-                    item.id = id;
-                    item.isCam = false;
-                    item.filePath = imageCursor.getString(dataColumnIndex);
-                    item.thumbPath = imageCursor
-                            .getString(dataThumbColumnIndex);
-                    adapter.getArrayList().add(item);
-                }
-
-                imageCursor.close();
-
+                adapter.getArrayList().addAll(arrayList);
                 return null;
             }
 
@@ -294,4 +267,7 @@ public class DetailPhotoBaseFragment extends BaseFragment implements
         }
     }
 
+    public void setArrayList(ArrayList<PhotoItem> arrayList) {
+        this.arrayList = arrayList;
+    }
 }

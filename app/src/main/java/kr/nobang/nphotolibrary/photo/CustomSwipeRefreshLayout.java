@@ -9,7 +9,7 @@ import android.widget.AbsListView;
 /**
  * 리플래시 뷰 스크롤 관련 버그 수정.
  *
- * @author offon
+ * @author nobang
  */
 public class CustomSwipeRefreshLayout extends SwipeRefreshLayout {
 

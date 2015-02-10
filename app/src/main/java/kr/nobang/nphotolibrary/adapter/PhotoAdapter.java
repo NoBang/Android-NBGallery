@@ -207,10 +207,8 @@ public class PhotoAdapter extends BaseAdapter {
 
             if (selectArray.contains(Integer.valueOf(position))) {
                 holder.imageCheck.setVisibility(View.VISIBLE);
-                Log.i("gmgm", "true");
             } else {
                 holder.imageCheck.setVisibility(View.GONE);
-                Log.i("gmgm", "false");
             }
 
             if (photoListener != null) {

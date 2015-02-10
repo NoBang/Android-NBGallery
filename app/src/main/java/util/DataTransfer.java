@@ -3,11 +3,11 @@ package util;
 import java.util.HashMap;
 
 /**
- * Created by offon on 15. 2. 9..
+ * Created by nobang on 15. 2. 9..
  */
 public class DataTransfer {
 
-    private HashMap<String, Object> hashMap;
+    public HashMap<String, Object> hashMap;
 
     private static DataTransfer object;
 

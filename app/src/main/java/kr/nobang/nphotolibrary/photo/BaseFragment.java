@@ -6,7 +6,7 @@ import android.support.v4.app.Fragment;
 /**
  * 모든 fragment는 이클래스 상속 한다. getActivity null을 막기 위한 클래스
  * 
- * @author offon
+ * @author nobang
  *
  */
 public class BaseFragment extends Fragment {

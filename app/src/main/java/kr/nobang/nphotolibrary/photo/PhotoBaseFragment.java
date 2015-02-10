@@ -78,7 +78,7 @@ public class PhotoBaseFragment extends BaseFragment implements
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        imageCount = getAttachActivity().getIntent().getIntExtra("count", 0);
+        imageCount = LoadPhotoActivity.SELECT_IMAGE_COUNT;
         maxCount = LoadPhotoActivity.IMAGE_MAX;
 
         initLayout();
@@ -116,7 +116,7 @@ public class PhotoBaseFragment extends BaseFragment implements
                     adapter.getSelectArray().remove(Integer.valueOf(position));
                 } else {
 
-                    if (adapter.getSelectArray().size() > Math.max(
+                    if (adapter.getSelectArray().size() >= Math.max(
                             (maxCount - imageCount),
                             1)) {
                         adapter.getSelectArray().remove(0);

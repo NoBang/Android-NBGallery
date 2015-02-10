@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 
+import org.json.JSONArray;
+
 import java.io.File;
 
 import kr.nobang.nphotolibrary.R;
@@ -11,7 +13,7 @@ import kr.nobang.nphotolibrary.R;
 
 /**
  * 카메라 툴을 불러오는 액티비티
- * @author offon
+ * @author nobang
  *
  */
 public class CameraPhotoActivity extends ImageSelectHelperActivity {
@@ -35,8 +37,10 @@ public class CameraPhotoActivity extends ImageSelectHelperActivity {
 			return;
 		}
 
+        JSONArray jsonArray = new JSONArray();
+        jsonArray.put(uri);
 		Intent intent = new Intent();
-		intent.putExtra("file", uri);
+		intent.putExtra("file", jsonArray.toString());
 		setResult(RESULT_OK, intent);
 		finish();
 	}

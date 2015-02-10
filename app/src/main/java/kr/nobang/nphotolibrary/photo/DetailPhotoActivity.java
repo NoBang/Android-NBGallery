@@ -5,10 +5,15 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 
 import org.json.JSONArray;
 
+import java.util.ArrayList;
+
+import data.PhotoItem;
 import kr.nobang.nphotolibrary.R;
+import util.DataTransfer;
 
 
 /**
@@ -24,11 +29,15 @@ public class DetailPhotoActivity extends FragmentActivity {
      */
     public final static int COMPLETE_PHOTO = 1001;
 
+    private ArrayList<PhotoItem> arrayList;
+
     @Override
     protected void onCreate(Bundle arg0) {
         super.onCreate(arg0);
         setContentView(R.layout.activity_empty);
 
+        arrayList = (ArrayList<PhotoItem>) DataTransfer.getInstance().hashMap.get("id");
+        DataTransfer.getInstance().hashMap.clear();
         settingFragment();
     }
 
@@ -37,6 +46,7 @@ public class DetailPhotoActivity extends FragmentActivity {
      */
     private void settingFragment() {
         DetailPhotoBaseFragment fragment = new DetailPhotoBaseFragment();
+        fragment.setArrayList(arrayList);
         FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
         ft.replace(R.id.container, fragment);
         ft.commit();
@@ -49,11 +59,9 @@ public class DetailPhotoActivity extends FragmentActivity {
 
         if (arg1 == RESULT_OK) {
             if (arg0 == COMPLETE_PHOTO) {
-                JSONArray json = new JSONArray();
 
-                json.put(arg2.getStringExtra("file"));
                 Intent intent = new Intent();
-                intent.putExtra("file", json.toString());
+                intent.putExtra("file", arg2.getStringExtra("file"));
                 setResult(Activity.RESULT_OK, intent);
                 finish();
             }

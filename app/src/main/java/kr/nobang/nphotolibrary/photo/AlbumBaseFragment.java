@@ -22,6 +22,7 @@ import data.AlbumItem;
 import data.PhotoItem;
 import kr.nobang.nphotolibrary.R;
 import kr.nobang.nphotolibrary.adapter.AlbumAdapter;
+import util.DataTransfer;
 
 
 /**
@@ -92,6 +93,10 @@ public class AlbumBaseFragment extends BaseFragment implements
             public void onClick(int position, View v) {
 
                 AlbumItem item = adapter.getArrayList().get(position);
+
+
+                DataTransfer dt = DataTransfer.getInstance();
+                dt.hashMap.put("id", item.arraylist);
 
 
                 Intent intent = new Intent(
@@ -193,14 +198,8 @@ public class AlbumBaseFragment extends BaseFragment implements
 
                     AlbumItem item = null;
 
-                    Log.i("gmgm", "name" + name);
-                    Log.i("gmgm", "bucket id" + bucket_id);
-
-
                     if (album_id.contains("" + bucket_id)) {
                         item = adapter.getArrayList().get(album_id.indexOf("" + bucket_id) + 1);
-
-                        Log.i("gmgm", "있음" + item.displayName);
 
                         PhotoItem pic = new PhotoItem();
                         pic.id = id;
@@ -211,7 +210,6 @@ public class AlbumBaseFragment extends BaseFragment implements
 
                     } else {
 
-                        Log.i("gmgm", "없음");
                         item = new AlbumItem();
                         item.id = bucket_id;
                         item.displayName = name;
