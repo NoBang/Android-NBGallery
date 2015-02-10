@@ -94,6 +94,11 @@ public class PhotoAdapter extends BaseAdapter {
      */
     private PhotoClickListener photoListener;
 
+    /**
+     * 카메라 아이콘
+     */
+    private int cameraIcon = R.drawable.photo_camera;
+
 
     public PhotoAdapter(Context context, int imageCount, int maxCount) {
         this.context = context;
@@ -162,7 +167,7 @@ public class PhotoAdapter extends BaseAdapter {
                 preview = new CameraPreview(context,
                         getCameraInstance());
                 camHolder.imageCheck
-                        .setImageResource(R.drawable.photo_camera);
+                        .setImageResource(cameraIcon);
                 camHolder.imageCheck.setVisibility(View.VISIBLE);
                 camHolder.container.addView(preview);
 
@@ -287,4 +292,7 @@ public class PhotoAdapter extends BaseAdapter {
         return selectArray;
     }
 
+    public void setCameraIcon(int cameraIcon) {
+        this.cameraIcon = cameraIcon;
+    }
 }

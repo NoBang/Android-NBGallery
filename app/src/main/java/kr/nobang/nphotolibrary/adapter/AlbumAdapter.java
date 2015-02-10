@@ -80,6 +80,11 @@ public class AlbumAdapter extends BaseAdapter {
      */
     private PhotoClickListener photoListener;
 
+    /**
+     * 카메라 아이콘
+     */
+    private int cameraIcon = R.drawable.photo_camera;
+
 
     public AlbumAdapter(Context context) {
         this.context = context;
@@ -146,7 +151,7 @@ public class AlbumAdapter extends BaseAdapter {
                 preview = new CameraPreview(context,
                         getCameraInstance());
                 camHolder.imageCheck
-                        .setImageResource(R.drawable.photo_camera);
+                        .setImageResource(cameraIcon);
                 camHolder.imageCheck.setVisibility(View.VISIBLE);
                 camHolder.container.addView(preview);
 
@@ -273,5 +278,7 @@ public class AlbumAdapter extends BaseAdapter {
         this.cameraListener = cameraListener;
     }
 
-
+    public void setCameraIcon(int cameraIcon) {
+        this.cameraIcon = cameraIcon;
+    }
 }
