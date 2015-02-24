@@ -18,12 +18,18 @@
     
 
 ### Step 2
+전체사진, 폴더별 사진으로 볼 수 있습니다.
+
 다중선택을 가능하게 해두었습니다.
+
 LoadPhotoActivity - IMAGE_MAX
+
 기본은 1이고 원하는값을 넣어서 사용하시면 될꺼 같습니다.
 
 LoadPhotoActivity - SELECT_IMAGE_COUNT 
+
 기본은 0이고 기존에 선택한 이미지 갯수를 넣어주시면 IMAGE_MAX값을 넘지 못합니다.
+
 
 IMAGE_MAX 3이고 SELECT_IMAGE_COUNT 2이면 이미지는 1장밖에 선택이 안됩니다.
 
