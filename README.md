@@ -37,4 +37,4 @@ IMAGE_MAX 3이고 SELECT_IMAGE_COUNT 2이면 이미지는 1장밖에 선택이 �
 
 
 ## Thanks
-- [Android-Universal-Image-Loader](httpshttps://github.com/nostra13/Android-Universal-Image-Loader)
+- [Android-Universal-Image-Loader](https://github.com/nostra13/Android-Universal-Image-Loader)
