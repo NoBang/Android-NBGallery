@@ -3,6 +3,12 @@
 제가 사용하고 있는 안드로이드 스마트폰에 있는 갤러리를 불러오는 샘플입니다.
 도움이 되실려나 싶어서 올려드립니다. ^ㅡ^; 버그또는... 기타 예기치 못한 오류는 알려주시면 수정해 보겠습니다.
 
+#ScreenShot
+
+![device-2015-02-25-100612](https://cloud.githubusercontent.com/assets/11173089/6363025/9e85eb94-bcd6-11e4-876c-1b7810df87f9.png)
+![device-2015-02-25-100658](https://cloud.githubusercontent.com/assets/11173089/6363031/a306fafa-bcd6-11e4-958f-db148b0ac55e.png)
+![device-2015-02-25-100717](https://cloud.githubusercontent.com/assets/11173089/6363034/a5a9f56e-bcd6-11e4-80d9-c72b5d5faf2f.png)
+
 #LG G2, 4.4.2
 
 ## Usage
