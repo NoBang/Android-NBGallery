@@ -11,17 +11,16 @@ import android.view.WindowManager;
 
 /**
  * 카메라 프리뷰
- * @author byeongnamno
  *
+ * @author byeongnamno
  */
 public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
     private SurfaceHolder mHolder;
-    private Camera mCamera;
-    String TAG = "gmgm";
+    private static Camera camera;
+    String TAG = "CameraPreview";
 
-    public CameraPreview(Context context, Camera camera) {
+    public CameraPreview(Context context) {
         super(context);
-        mCamera = camera;
 
         // Install a SurfaceHolder.Callback so we get notified when the
         // underlying surface is created and destroyed.
@@ -33,28 +32,28 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 
     public void surfaceCreated(SurfaceHolder holder) {
         // The Surface has been created, now tell the camera where to draw the preview.
-        try{
-            mCamera.setPreviewDisplay(holder);
-        } catch (Exception e){
+        try {
+            mHolder = holder;
+            camera = getCameraInstance();
+            camera.setPreviewDisplay(mHolder);
+        } catch (Exception e) {
             Log.d(TAG, "Error setting camera preview: " + e.getMessage());
         }
     }
 
     public void surfaceDestroyed(SurfaceHolder holder) {
         // empty. Take care of releasing the Camera preview in your activity.
-        try{
-            mCamera.stopPreview();
-        } catch (Exception e){
+        try {
+            camera.stopPreview();
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
-        try{
-            mCamera.release();
-        } catch (Exception e){
+        try {
+            camera.release();
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
-        mCamera = null;
 
     }
 
@@ -62,15 +61,15 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // If your preview can change or rotate, take care of those events here.
         // Make sure to stop the preview before resizing or reformatting it.
 
-        if (mHolder.getSurface() == null){
+        if (mHolder.getSurface() == null) {
             // preview surface does not exist
             return;
         }
 
         // stop preview before making changes
-        try{
-            mCamera.stopPreview();
-        } catch (Exception e){
+        try {
+            camera.stopPreview();
+        } catch (Exception e) {
             // ignore: tried to stop a non-existent preview
         }
 
@@ -78,18 +77,19 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
         // reformatting changes here
 
         // start preview with new settings
-        try{
-            mCamera.setPreviewDisplay(mHolder);
-            mCamera.setDisplayOrientation(setRotate());
-            mCamera.startPreview();
+        try {
+            camera.setPreviewDisplay(mHolder);
+            camera.setDisplayOrientation(setRotate());
+            camera.startPreview();
 
-        } catch (Exception e){
+        } catch (Exception e) {
             Log.d(TAG, "Error starting camera preview: " + e.getMessage());
         }
     }
 
     /**
      * 화면 각도
+     *
      * @return 카메라 회전 각도
      */
     private int setRotate() {
@@ -126,11 +126,35 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
     }
 
     public void reConnect() {
-        try{
-            mCamera.reconnect();
-        } catch (Exception e){
+        try {
+            camera.reconnect();
+        } catch (Exception e) {
             e.printStackTrace();
         }
+    }
+
+    /**
+     * A safe way to get an instance of the Camera object.
+     */
+    public static Camera getCameraInstance() {
+        try {
+            if (camera == null) {
+                camera = Camera.open(0); // attempt to get a Camera instance
+            } else {
+                camera.reconnect();
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            // Camera is not available (in use or does not exist)
+            try {
+                camera = Camera.open(0);
+            } catch (Exception e2) {
+                e2.printStackTrace();
+            }
+
+        }
+        return camera; // returns null if camera is unavailable
     }
 
 }

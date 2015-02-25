@@ -66,11 +66,6 @@ public class AlbumAdapter extends BaseAdapter {
 
 
     /**
-     * 카메라
-     */
-    private static Camera camera;
-
-    /**
      * 카메라 클릭 리스너
      */
     private View.OnClickListener cameraListener;
@@ -148,8 +143,7 @@ public class AlbumAdapter extends BaseAdapter {
                 camHolder.txt_count = (TextView) convertView.findViewById(R.id.txt_count);
                 convertView.setTag(camHolder);
 
-                preview = new CameraPreview(context,
-                        getCameraInstance());
+                preview = new CameraPreview(context);
                 camHolder.imageCheck
                         .setImageResource(cameraIcon);
                 camHolder.imageCheck.setVisibility(View.VISIBLE);
@@ -244,30 +238,6 @@ public class AlbumAdapter extends BaseAdapter {
         TextView txt_title;
         TextView txt_count;
         FrameLayout container;
-    }
-
-    /**
-     * A safe way to get an instance of the Camera object.
-     */
-    public static Camera getCameraInstance() {
-        try {
-            if (camera == null) {
-                camera = Camera.open(0); // attempt to get a Camera instance
-            } else {
-                camera.reconnect();
-            }
-
-        } catch (Exception e) {
-            e.printStackTrace();
-            // Camera is not available (in use or does not exist)
-            try {
-                camera = Camera.open(0);
-            } catch (Exception e2) {
-                e2.printStackTrace();
-            }
-
-        }
-        return camera; // returns null if camera is unavailable
     }
 
     public void setPhotoListener(PhotoClickListener photoListener) {
