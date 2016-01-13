@@ -23,12 +23,12 @@ import android.view.WindowManager;
  *
  * @author byeongnamno
  */
-public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback {
+public class TakeCameraPreview extends SurfaceView implements SurfaceHolder.Callback {
 	private SurfaceHolder mHolder;
 	private static Camera camera;
 	String TAG = "CameraPreview";
 
-	public CameraPreview(Context context) {
+	public TakeCameraPreview(Context context) {
 		super(context);
 
 		// Install a SurfaceHolder.Callback so we get notified when the
@@ -138,7 +138,7 @@ public class CameraPreview extends SurfaceView implements SurfaceHolder.Callback
 	public static Camera getCameraInstance() {
 		
 		stop();
-
+		
 		try {
 			if (camera == null) {
 				camera = Camera.open(0); // attempt to get a Camera instance

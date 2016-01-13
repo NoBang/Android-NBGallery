@@ -134,6 +134,7 @@ public class PhotoBaseFragment extends BaseFragment implements
 
             @Override
             public void onClick(View v) {
+                adapter.stopCamera();
                 Intent intent = new Intent(
                         getAttachActivity(),
                         CameraPhotoActivity.class);

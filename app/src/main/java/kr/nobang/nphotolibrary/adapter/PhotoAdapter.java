@@ -265,4 +265,8 @@ public class PhotoAdapter extends BaseAdapter {
     public void setCameraIcon(int cameraIcon) {
         this.cameraIcon = cameraIcon;
     }
+
+    public void stopCamera(){
+        preview.stop();
+    }
 }
