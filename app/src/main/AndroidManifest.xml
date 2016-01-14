@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-          package="kr.nobang.nphotolibrary">
+<manifest package="kr.nobang.nphotolibrary"
+          xmlns:android="http://schemas.android.com/apk/res/android">
 
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
@@ -26,7 +26,10 @@
 
         <activity android:name=".photo.LoadPhotoActivity"/>
 
-        <activity android:name=".photo.CameraPhotoActivity"/>
+        <activity
+            android:name=".photo.CameraPhotoActivity"
+            android:configChanges="orientation|keyboard|keyboardHidden|screenSize|screenLayout|uiMode"
+            />
 
         <activity android:name=".photo.DetailPhotoActivity"/>
 
